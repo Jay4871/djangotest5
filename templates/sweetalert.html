@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>persons</title>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/sweetalert/sweetalert.css">
+</head>
+<body>
+
+
+<div class="container">
+    <div class="panel panel-default">
+          <div class="panel-heading">person管理</div>
+           <div class="panel-body">
+               <table class="table table-bordered">
+                    <thead>
+                      <tr>
+                          <th>序号</th>
+                          <th>id</th>
+                          <th>name</th>
+                          <th>age</th>
+                          <th>操作</th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for i in persons %}
+                            <tr>
+                                <td>{{ forloop.counter }}</td>
+                                <td>{{ i.id }}</td>
+                                <td>{{ i.name }}</td>
+                                <td>{{ i.age }}</td>
+                                <td><button  class="btn btn-danger delete-button"><i>删除</i></button></td>
+                            </tr>
+                        {% endfor %}
+
+
+                    </tbody>
+                </table>
+          </div>
+    </div>
+
+
+</div>
+
+
+</body>
+
+<script src="/static/bootstrap/jquery-3.3.1.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/csrfajax.js"></script>
+<script src="/static/sweetalert/sweetalert.js"></script>
+
+<script>
+$(function () {
+
+    $('.delete-button').click(function () {
+            var $tr=$(this).parent().parent();
+            var delId=$tr.children().eq(1).text();
+            swal({
+                  title: "确定删除吗？",
+                  text: "删了就删了",
+                  type: "warning",
+                  showCancelButton: true,
+                  confirmButtonClass: "btn-warning",
+                  confirmButtonText: "确定",
+                  cancelButtonText: "取消",
+                  closeOnConfirm: false,
+                  closeOnCancel: true
+                },
+                function(isConfirm) {
+                    if (isConfirm) {
+
+                        $.ajax({
+                            url: '/delete/',
+                            type: 'post',
+                            data: {'id': delId},
+                            success: function (arg) {
+                                swal(arg, 'delete', 'success')
+                                $tr.remove();
+                            }
+
+
+                        });
+
+
+                    } else {
+                        swal("Cancelled", "Your imaginary file is safe :)", "error");
+                    }
+                });
+
+
+
+    })
+
+
+})
+
+
+
+</script>
+
+
+
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<input id="num1" type="text" name="num1">+<input id="num2" type="text" name="num2" onblur="ajaxSubmit()"/>=<input id="total" type="text" name="total" />
+
+</body>
+
+<script type="text/javascript">
+    var xmlHttpRequest=null;
+
+   function  ajaxSubmit() {
+       //浏览器的兼容性
+       if(window.ActiveXObject)
+       {
+           xmlHttpRequest=new ActiveXObject("Microsoft.XMLHTTP");
+       }
+       else if(window.XMLHttpRequest)
+       {
+           xmlHttpRequest=new XMLHttpRequest();
+       }
+
+       if(null!=xmlHttpRequest)
+       {
+           var  num1=document.getElementById('num1').value
+           var  num2=document.getElementById('num2').value
+
+           xmlHttpRequest.open('POST','/ajax_calc/',true) //准备向服务器发送请求
+
+           xmlHttpRequest.onreadystatechange=function()
+           {
+               if(xmlHttpRequest.readyState==4)
+               {
+                   if(xmlHttpRequest.status==200)
+                   {
+                        var responseText=xmlHttpRequest.responseText
+                        document.getElementById('total').value=responseText
+                   }
+               }
+           }
+           //告诉浏览器使用post方法提交数据
+           xmlHttpRequest.setRequestHeader("Content-Type",'application/x-www-form-urlencoded')
+           xmlHttpRequest.send('num1='+num1+'&num2='+num2)
+
+
+       }
+
+
+
+   }
+
+
+
+
+</script>
+</html>

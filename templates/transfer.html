@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+ 正常的网站
+<form action="/transfer/" method="post">
+    {% csrf_token %}
+  <p>
+      转出
+      <input type="text" name="from">
+  </p>
+
+    <p>
+      转入
+      <input type="text" name="to">
+   </p>
+    <p>
+      金额
+      <input type="text" name="money">
+    </p>
+     <p>
+      金额
+      <input type="submit" name="转账">
+   </p>
+</form>
+
+</body>
+</html>

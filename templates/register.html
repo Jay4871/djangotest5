@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/static/bootstrap/csrfajax.js"></script>
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/sweetalert/sweetalert.css">
+</head>
+<body>
+
+{# <form action="/register/" method="post" novalidate>#}
+{#     {% csrf_token %}#}
+{##}
+{#     {{ form_obj.as_p }}#}
+{##}
+{#     <p><input type="submit" /></p>#}
+{##}
+{##}
+{##}
+{# </form>#}
+
+<div class="container">
+    <div class="row">
+        <form action="/register/" method="post" novalidate>
+                {% csrf_token %}
+        <div class="form-group {% if form_obj.name.errors.0%} has-error {% endif %}" >
+            {{ form_obj.name.label }}
+            {{ form_obj.name }}
+            <span class="help-block">{{ form_obj.name.errors.0 }}</span>
+        </div>
+
+          <div class="form-group {% if form_obj.age.errors.0%} has-error {% endif %}" >
+                {{ form_obj.age.label }}
+                {{ form_obj.age }}
+                <span class="help-block">{{ form_obj.age.errors.0 }}</span>
+            </div>
+
+{#         <div class="form-group {% if form_obj.city.errors.0%} has-error {% endif %}" >#}
+{#                {{ form_obj.city.label }}#}
+{#                {{ form_obj.city }}#}
+{#                <span class="help-block">{{ form_obj.city.errors.0 }}</span>#}
+{#         </div>#}
+
+        <div class="form-group" >
+
+            <input type="submit" class="btn btn-primary">
+         </div>
+
+        </form>
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+
+
+<script src="/static/bootstrap/jquery-3.3.1.min.js"></script>
+<script src="/static/bootstrap/js/bootstrap.min.js"></script>
+<script src="/static/bootstrap/csrfajax.js"></script>
+<script src="/static/sweetalert/sweetalert.js"></script>
+
+
+
+</body>
+</html>
